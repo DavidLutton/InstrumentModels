@@ -1,0 +1,35 @@
+spec: "1.1"
+devices:
+  device 5:
+    eom:
+      ASRL INSTR:
+        q: "\r\n"
+        r: "\n"
+      USB INSTR:
+        q: "\n"
+        r: "\n"
+      TCPIP INSTR:
+        q: "\n"
+        r: "\n"
+      GPIB INSTR:
+        q: "\n"
+        r: "\n"
+    dialogues:
+      - q: "*IDN?"
+        r: "HEWLETT-PACKARD,437B,,2.0,MOCK"
+    properties:
+      power:
+        default: 0
+        getter:
+          q: ?
+          r: "{:+.3E}"
+        setter:
+          q: ":SIM:SET:power {:.3f}"
+        specs:
+          min: -30
+          max: 20
+          type: float
+
+resources:
+  GPIB::11::INSTR:
+    device: device 5
